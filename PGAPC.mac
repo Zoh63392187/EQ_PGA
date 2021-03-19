@@ -1,0 +1,36 @@
+|**
+    PGAPC - PvpGetAwayPosseConf Original Author: Blasty
+    PvpGetAwayPosseConf v0.1 Maintained for RedGuides by Blast 03/03/2021
+    This macro configures the plugin Posse to help you to get away when another player gets too close by casting any AA, ability or spell
+	Very helpfull on Live Zek (PVP server)
+	This macro works when KissAssist is running but run it before KissAssist
+	Players on your friendlist, guildies or fellowship does not trigger this macro by default but can be changed
+	Dependecy plugin: Posse https://www.redguides.com/community/resources/mq2posse.156/
+	Inspired by KissAssist and Posse
+    This macro was written exclusively for subscribers of Redguides.com
+  -------------------------------------------------------------------------------------
+**|
+
+Sub Main
+
+/declare holding bool local
+/if (${Macro.IsTLO[Posse]}) {
+	|Start posse if posse.status returns false
+	/if (!${Posse.Status}) { 
+		/posse on
+	}
+	
+	|configure posse to meet your requirements
+	/posse radius 500
+	/posse zradius 500
+	/posse guildmates on
+	/posse fellowship on
+	/posse cmdadd "/alt activate 1217"
+	
+	/popup PvpGetAway has configured Posse!
+	/echo PvpGetAwayPosseConf has configured Posse!
+	/echo Jobs done - ending macro
+} else {
+	/echo Posse Plugin not avaliable - aborting
+	/endmacro
+}

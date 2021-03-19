@@ -1,0 +1,48 @@
+|**
+    PGA - PvpGetaway Original Author: Blast
+    PvpGetaway v0.1 Maintained for RedGuides by Blast 03/03/2021
+    This macro help you to get away when another player gets too close by casting any AA ability or spell.
+	Players on your friendlist, guildies or fellowship does not trigger this macro by default but can be changed
+	Dependecy plugin: Posse https://www.redguides.com/community/resources/mq2posse.156/
+	Inspired by KissAssist and Posse
+    This macro was written exclusively for subscribers of Redguides.com
+  -------------------------------------------------------------------------------------
+**|
+
+Sub Main
+
+/declare holding bool local
+/if (${Macro.IsTLO[Posse]}) {
+    |Start posse if posse.status returns false
+	/if (!${Posse.Status}) { 
+		/posse on
+	}
+	
+	|configure posse to meet your requirements
+	/posse radius 500
+	/posse zradius 500
+	/posse guildmates on
+	/posse fellowship on
+	
+	|wait for posse plugin to start
+	/delay 2s
+	/echo PvpGetAway started!
+	/popup PvpGetAway started!
+	
+	/while (TRUE) {
+		/if (${Posse.Strangers}>=1) {
+			/if (!${holding}) {
+				/varset holding 1
+				| --> Below you can modify, replace or add more commands to execute. It could be like "/cast 8" <--
+				/beep
+				/beep
+				/alt activate 1217
+			}
+			/endmacro
+		}
+		/delay 1s
+	}
+} else {
+	/echo Posse Plugin not avaliable - aborting
+	/endmacro
+}
